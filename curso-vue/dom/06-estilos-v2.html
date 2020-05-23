@@ -15,7 +15,7 @@
   .cor-1 {
     background-color: red;
   }
-  .c2 {
+  .cor-2 {
     background-color: green;
   }
   .c3 {
@@ -24,8 +24,8 @@
 </style>
 
 <div id="app">
-  <div class="demo" :class="{'cor-1' : aplicarC1}" @click="aplicarC1 = !aplicarC1"></div>
-  <div class="demo"></div>
+  <div class="demo" :class="{'cor-1' : aplicarC1, 'cor-2' : !aplicarC1}" @click="aplicarC1 = !aplicarC1"></div>
+  <div class="demo" :class="aplicar" @click="aplicarC1 = !aplicarC1"></div>
   <div class="demo"></div>
 </div>
 
@@ -34,6 +34,14 @@
     el: '#app',
     data: {
       aplicarC1: false
+    },
+    computed: {
+      aplicar() {
+        return {
+          'cor-1': this.aplicarC1,
+          'cor-2': !this.aplicarC1
+        }
+      }
     }
   })
 </script>
