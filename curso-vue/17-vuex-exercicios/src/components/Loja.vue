@@ -17,6 +17,7 @@
 import { mapActions } from "vuex";
 
 export default {
+   /* eslint-disable */
   data() {
     return {
       sequencia: 1
@@ -31,7 +32,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["adicionarProduto"]),
+    ...mapActions('carrinho', ["adicionarProduto"]),
     adicionar() {
       const produto = {
         id: this.sequencia,
