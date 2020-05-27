@@ -5,21 +5,41 @@ import Usuario from './components/usuario/Usuario'
 import UsuarioLista from './components/usuario/UsuarioLista'
 import UsuarioDetalhe from './components/usuario/UsuarioDetalhe'
 import UsuarioEditar from './components/usuario/UsuarioEditar'
+import Menu from './components/template/Menu';
+import MenuAlt from './components/template/MenuAlt';
 
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'history',
+  scrollBehavior(to, from, savePosition) {
+    if (savePosition) {
+      return savePosition
+    } else if (to.hash) {
+      return { selector: to.hash }
+    } else {
+      return { x:0, y:0 }
+    }
+  },
   routes: [
     {
+      name: 'inicio',
       path: '/',
-      component: Inicio,
-      name: 'inicio'
+      //component: Inicio,
+      components: {
+        default: Inicio,
+        menu: Menu,
+      }
     },
     {
       path: '/usuario',
-      component: Usuario,
+      //component: Usuario,
+      components: {
+        default: Usuario,
+        menu: MenuAlt,
+        menuInferior: MenuAlt
+      },
       props: true,
       children: [
         {
@@ -29,7 +49,11 @@ export default new Router({
         {
           path: ':id',
           component: UsuarioDetalhe,
-          props: true
+          props: true,
+          beforeEnter: (to, from, next) => {
+            console.log('Antes de rota => usuário detalhe');
+            next()
+          }
         },
         {
           path: ':id/editar',
@@ -38,6 +62,21 @@ export default new Router({
           name: 'editarUsuario'
         }
       ]
+    },
+    {
+      path: '/redirecionar',
+      redirect: '/usuario'
+    },
+    {
+      path: '*',
+      redirect: '/'
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  console.log('Antes das rotas -> global')
+  next()
+
+})
+export default router
