@@ -5,7 +5,9 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    produtos: [ ]
+    produtos: [ ],
+    quantidade: 2,
+    preco: 19.99
   },
   getters: {
     valorTotal(state) {
@@ -13,8 +15,25 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    // apenas muda a store
     adicionarProduto(state, payload) {
       state.produtos.push(payload)
+    },
+    setQuantidade(state, payload) {
+      state.quantidade = payload
+    },
+    setPreco(state, payload) {
+      state.preco = payload
+    }
+  },
+  actions: {
+    //regras de negocio vem aqui
+
+    //adicionarProduto(context, payload) {
+    adicionarProduto( { commit }, payload) {
+      setTimeout(() => {
+        commit('adicionarProduto', payload)
+      }, 1000);
     }
   }
 })
