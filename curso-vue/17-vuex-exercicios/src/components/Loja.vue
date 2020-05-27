@@ -41,6 +41,8 @@ export default {
       };
       this.sequencia++;
       this.$store.dispatch("adicionarProduto", produto);
+      console.log(this.$store.getters.getNome);
+      console.log(this.$store.getters.getNomeCompleto);
     }
   }
 };
