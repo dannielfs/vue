@@ -1,6 +1,6 @@
 <template>
   <v-layout row wrap>
-    <stock v-for="stock in stocks" :key="stock.id"> </stock>
+    <stock v-for="stock in stocks" :key="stock.id" :stock="stock"> </stock>
   </v-layout>
 </template>
 

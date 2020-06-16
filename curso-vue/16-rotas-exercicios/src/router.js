@@ -50,10 +50,10 @@ const router = new Router({
           path: ':id',
           component: UsuarioDetalhe,
           props: true,
-          beforeEnter: (to, from, next) => {
+         /*  beforeEnter: (to, from, next) => {
             console.log('Antes de rota => usuário detalhe');
             next()
-          }
+          } */
         },
         {
           path: ':id/editar',
@@ -72,11 +72,11 @@ const router = new Router({
       redirect: '/'
     }
   ]
-})
+})/*
 
 router.beforeEach((to, from, next) => {
   console.log('Antes das rotas -> global')
   next()
 
-})
+}) */
 export default router
